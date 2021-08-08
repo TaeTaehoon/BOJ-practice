@@ -1,6 +1,10 @@
 let input = require('fs').readFileSync('input.txt').toString().split('\n');
 
-let num = Number(input);
+let num = Number(input[0]);
+//vsc상으로는 문제가 없었지만 백준에서 채점시 시간초과 오류가 지속적으로 발생함.
+//문제를 찾던 중 인풋이 하나인데 배열을 넣어서 그런가 하고 split메소드 삭제하니 해결
+//그러나 split 메소드로 배열을 만든뒤 input[0]으로 명시해주자 더욱 빨라졌다.
+//배열의 중요성과 명시적인 코드작성의 필요성을 깨달았다...
 let sum;
 let i = 0;
 
@@ -11,7 +15,7 @@ while (true) {
 
     i++;
 
-    if (Number(input) === num) {
+    if (Number(input[0]) === num) {
 	break;
     } 
 }
