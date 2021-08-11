@@ -1,21 +1,14 @@
-let input = require('fs').readFileSync('input.txt').toString().split('\n');
+let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 
-let remain = [];
+const userNum = [];
 
+input.forEach(x => {
+     const num = x % 42;
+    
+    if (userNum.indexOf(num) === -1) {
+        userNum.push(num);
+    }
+});
 
-for (i=0; i <=input.length-1; i++) {
-    remain.push(Number(input[i]) % 42);
-    remain.join('');
-    console.log(remain);
-}
-
-for(s=0; s <= remain.length-1; s++) {
-    let count = 0;
-
-        for (t=0; t <= remain.length-1; t++) {
-            if (Number(remain[t]) == Number(remain[s])) {
-                count++;
-            }
-        }
-    console.log(count);
-}
+console.log(userNum.length);
+//함수를 쓰지않고 풀고싶었으나..아직은 무리인듯하다..
