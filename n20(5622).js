@@ -7,25 +7,29 @@ let result = 0;
 
 for( i = 0; i <= input.length - 1; i++) {
 
-    if (string.indexOf(input[i]) <= 2) {
+    let num = Number(string.indexOf(input[i]));
+
+    if (num <= 2) {
         result += 3;
-    } else  if (string.indexOf(input[i]) <= 5 && 2 < string.indexOf(input[i])) {
+    } else  if (num <= 5 && 2 < num) {
         result += 4;
-    } else  if (string.indexOf(input[i]) <= 8 && 5 < string.indexOf(input[i])) {
+    } else  if (num <= 8 && 5 < num) {
         result += 5;
-    } else  if (string.indexOf(input[i]) <= 11 && 8 < string.indexOf(input[i])) {
+    }  else  if (num <= 11 && 8 < num) {
         result += 6;
-    } else  if (string.indexOf(input[i]) <= 14 && 11 < string.indexOf(input[i])) {
+    }  else  if (num <= 14 && 11 < num) {
         result += 7;
-    } else  if (string.indexOf(input[i]) <= 18 && 14 < string.indexOf(input[i])) {
+    } else  if (num <= 18 && 14 < num) {
         result += 8;
-    } else  if (string.indexOf(input[i]) <= 21 && 18 < string.indexOf(input[i])) {
+    }  else  if (num <= 21 && 18 < num) {
         result += 9;
-    } else  if (string.indexOf(input[i]) <= 25 && 21 < string.indexOf(input[i])) {
+    }  else  if (num <= 25 && 21 < num) {
         result += 10;
     }
 
 }
+//type 문제라고 생각해서 Number태그를 이용하였는데 여전히 풀리지않는다...
+
 console.log(input);
 console.log(string.length);
 console.log(result);
