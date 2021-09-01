@@ -4,18 +4,9 @@ let input = require('fs').readFileSync('input.txt').toString().split(' ');
 const A = Number(input[0]);
 const B = Number(input[1]);
 const V = Number(input[2]);
-let height = 0;
-let date = 0;
 
-while(true) {
-    date++;
-    height += A;
-
-    if (V <= height) {
-        console.log(date);
-        break;
-    }
-    height -= B;
-}
-//맞는 풀이이기는 하지만 시간제한을 보니 올바른 풀이는 아닌듯하다.
-//input값이 커지면 시간도 오래걸려서..시간을 단축할 알고리즘을 찾아보자..!
+console.log(Math.ceil((V - A)/(A - B)) + 1);
+//너무 복잡하게 생각한게 아니었나! 수학적 풀이를 찾아냈다..!
+//우선 마지막날 정상에 도달하거나 정상을 넘어가는 높이를 올라가게되기에 +1을 해줌
+//그리고 마지막날 올라가는 A높이를 제외한 날들은 A-B만큼 올라가니까 나누고 소수점을 올림해줬다.
+//=>소수점이 나온다는 것은 A-B가 남은 높이보다 크다는 거니까 일단 정상에 도달한다.
