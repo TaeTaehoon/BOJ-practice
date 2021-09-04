@@ -3,21 +3,25 @@ let input = require('fs').readFileSync('input.txt').toString().split('\n');
 const N = Number(input[0]);
 let x = 0;
 let y = 0;
-let sugar = (x == 0 && y == 0 ? 0 : 3*x + 5*y);
-console.log(sugar);
-if(N == 1 || N == 2 || N == 4) {
+
+if(N == 4) {
     console.log(-1);
-} else 
-if (N == 3 || 5 <= N) {
-    while(N != sugar) {
-        x++;
-        if(x%5 == 0) {
-            x = 0; 
-            y++; 
-        }
+} else {
+    while(true) {
+        let sugar = 3*x + 5*y;
+
         if(sugar == N) {
             console.log(x + y); 
             break;
+        } else
+        if(x == 9 && sugar != N) {
+            console.log(-1);
+            break;
+        }
+        y++;
+        if(y == 10) {
+            y = 0; 
+            x++; 
         }
     }
 }
