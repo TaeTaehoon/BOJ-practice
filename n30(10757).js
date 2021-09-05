@@ -39,3 +39,46 @@ console.log(splitE);
 console.log(`${sumF} , ${sumE}`);
 console.log(sumF + sumE);
 //많은 시간을 허비하고 나서야 잘못 풀고 있음을 깨달음... 나중에 수정하자..
+/*
+let input = require('fs').readFileSync('input.txt').toString().split(' ');
+
+const A = input[0];
+const B = input[1];
+let splitF = [];
+let splitE = [];
+
+console.log(input[0].length);
+console.log(input[0].indexOf('', 16));
+for(element of input) {
+
+    if (element.length > 16) {
+
+        splitF.push(element.slice(0, 16));
+        splitE.push(element.slice(16, element.length));
+
+    }
+}
+
+let sumF = (Number(splitF[0]) + Number(splitF[1])).toString();
+let sumE = (Number(splitE[0]) + Number(splitE[1])).toString();
+
+if(sumF.endsWith('0') == true) {
+    if(sumE.length == A.length - 16) {
+        console.log(sumF + sumE);
+    } else // 덧셈하여도 자릿수는 늘지 않은 경우
+    if (sumE.length == A.length - 15) {
+        let numF = sumF.slice(-1, sumF.length);
+        if (numF == 0) {
+            console.log(sumF.slice(0, -1) + sumE);
+        } else
+        if (numF != 0) {
+           let numE = Number(numF.padEnd(sumE.length, '0')) + Number(sumE);
+           console.log(sumF.slice(0, -1) + `${numE}`);
+        }
+        console.log(numF);
+    }//덧셈으로 인해 한 자리수 더 늘어난 경우
+    
+} else {
+
+}
+*/
