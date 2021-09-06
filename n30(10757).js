@@ -1,84 +1,32 @@
-let input = require('fs').readFileSync('input.txt').toString().split(' ');
+let input = require('fs').readFileSync('input.txt').toString().trim().split(' ');
+//trim!! 그놈의 trim잘쓰자!!!!!!
+let A = input[0].split('').map((x) => +x).reverse();
+let B = input[1].split('').map((x) => +x).reverse();
+//A와 B를 자릿수마다 배열에 저장하고 1의자리부터 덧셈을 해야하므로 수를 뒤집었다.
+let result = [];
+let count = 0;
+let longernum = A.length >= B.length ? A : B;
+//한쪽의 수가 더 길면 같은 자리수가 존재하지 않으므로 문제를 해결하기 위해 긴 숫자를 지정해줬다.
 
-const A = input[0];
-const B = input[1];
-let splitF = [];
-let splitE = [];
+while(true) {
+    let sum = count in A && count in B ? A[count]+B[count] : longernum[count];
+    //두 수가 서로 자릿수가 같지 않다면 덧셈을 할때 한쪽은 null값이 더해져 숫자로 인식하지 못하는 오류 발생.
+    //그래서 한쪽만 해당 자릿수가 존재한다면 그냥 해당 숫자만을 sum값으로 지정해줌.
+    if (sum >= 10) {
+        if (count + 1 == longernum.length) {
+            result.push(sum%10);
+            result.push(1);
+            break;
+        } else {
+            result.push(sum%10);
+            longernum[count+1] ++;
+        }//그중에서도 다음 자릿수가 A B중 한쪽만 있는경우 긴수에 대해서만 해당 과정을 실행한다.
+    } else {
+        result.push(sum);
+    }//sum이 10 이상인 경우 다음자릿수가 +1이 되게 하였으며
 
-console.log(input[0].length);
-console.log(input[0].indexOf('', 16));
-for(element of input) {
-
-    if (element.length > 16) {
-
-        splitF.push(element.slice(0, 16));
-        splitE.push(element.slice(16, element.length));
-
-    }
+    count++;
+    if (count == longernum.length) {break;}
+    //count값을 이용하여 긴 숫자의 길이만큼 해당 과정을 반복시킨다.
 }
-//숫자가 16자리 이상이면 뒤에서 부터 반올림되서 잘려버리는 것을 발견.
-//컨셉 => 앞에서 부터 16자리를 기준으로 앞수 뒷수로 나눈뒤 해당수들끼리 더한값을 다시 붙여 반환.
-//발생한 문제 => 16번째자리 혹은 17번째자리쯤에서 앞수 뒷수에서 값이 중복되어 자릿수가 늘어나버림! wtf?
-let sumF = (Number(splitF[0]) + Number(splitF[1])).toString();
-let sumE = (Number(splitE[0]) + Number(splitE[1])).toString();
-
-if(sumF.endsWith('0') == true) {
-    if(sumE.length == 3) {
-
-    } else
-    if (sumE.length == 4) {
-        
-    }
-    let numF = sumf.slice(0, -1);
-} else {
-
-}
-
-console.log(splitF);
-console.log(splitE);
-console.log(`${sumF} , ${sumE}`);
-console.log(sumF + sumE);
-//많은 시간을 허비하고 나서야 잘못 풀고 있음을 깨달음... 나중에 수정하자..
-/*
-let input = require('fs').readFileSync('input.txt').toString().split(' ');
-
-const A = input[0];
-const B = input[1];
-let splitF = [];
-let splitE = [];
-
-console.log(input[0].length);
-console.log(input[0].indexOf('', 16));
-for(element of input) {
-
-    if (element.length > 16) {
-
-        splitF.push(element.slice(0, 16));
-        splitE.push(element.slice(16, element.length));
-
-    }
-}
-
-let sumF = (Number(splitF[0]) + Number(splitF[1])).toString();
-let sumE = (Number(splitE[0]) + Number(splitE[1])).toString();
-
-if(sumF.endsWith('0') == true) {
-    if(sumE.length == A.length - 16) {
-        console.log(sumF + sumE);
-    } else // 덧셈하여도 자릿수는 늘지 않은 경우
-    if (sumE.length == A.length - 15) {
-        let numF = sumF.slice(-1, sumF.length);
-        if (numF == 0) {
-            console.log(sumF.slice(0, -1) + sumE);
-        } else
-        if (numF != 0) {
-           let numE = Number(numF.padEnd(sumE.length, '0')) + Number(sumE);
-           console.log(sumF.slice(0, -1) + `${numE}`);
-        }
-        console.log(numF);
-    }//덧셈으로 인해 한 자리수 더 늘어난 경우
-    
-} else {
-
-}
-*/
+console.log(result.reverse().join(''));
