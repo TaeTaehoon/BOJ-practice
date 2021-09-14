@@ -4,9 +4,26 @@ let num = Math.sqrt(Number(input));
 
 solve(num);
 
+function isPrime(n) {
+    if (n <= 1) return false;
+  
+    const squareRoot = Math.floor(Math.sqrt(n));
+  
+    for (let i = 2; i <= squareRoot; i++) {
+      if (n % i === 0) {
+        return false;
+      }
+    }
+  
+    return true;
+}
+
 function solve(num) {
     let center = Math.round(num);
     let lessnum = [];
+
+    if(num == 1) {return;}
+
     while(true) {
         if(Number(input)/center == Math.floor(Number(input)/center)) {
             lessnum.push(center);
@@ -21,25 +38,21 @@ function solve(num) {
     for(i = 0; i < lessnum.length; i++) {
         const A = lessnum[i];
         let count = 2;
+        if(isPrime(A)) {
+            smallnum.push(A);
+            continue;
+        }
         while(true) {
             if(Math.pow(A, 1/count) == Math.floor(Math.pow(A, 1/count))) {
                 for(j = 1; j <= count; j++) {
                     smallnum.push(Math.pow(A, 1/count));
                 }
                 break;
-            } else if(count > 19) {
-                smallnum.push(A);
-            }
+            } 
             count++;
         }
     }
     
-    if(num == 1) {console.log();}
-    console.log(lessnum);
-    console.log(smallnum);
+    console.log(smallnum.join('\n'));
 }
-/*
-주어진 num의 제곱근에 근사값을 중앙값으로 삼아 적은쪽으로 나아가면서 인수들을 찾고있는데
-해당 인수가 또다른 인수를 갖고있다면 해당 수를 어떻게 다시 인수로 나누어 가장 작은 
-소인수를 찾아낼 수 있는지 생각중이다. => 쫌만 더 하면 될 듯...?
-*/
+//시간초과가 나긴했으나...푼게 너무 아까워서 올림! 소수판별함수를 통하여 소수를 소인수로 갖는 경우에도 대처가능!
