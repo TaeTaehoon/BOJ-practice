@@ -30,35 +30,47 @@ function findLimit(n) {
     }
 }
 function solve(M, N) {
-    let numRange = [];
-    numRange.length = N-M+1;
-    numRange.fill(true, 0, N-M+1);
+    let numRange = Array(N+1).fill(true, 0, N+1);
 
 
     let finder = 2;
-    let smallnumbers = [];
+    let smallsindex = [];
 
     while(finder <= findLimit(N)) {
         if(isPrime(finder)) {
-            smallnumbers.push(finder)
+            smallsindex.push(finder)
         }
         finder++;
     }
-    console.log(numRange);
 
-    let multiflier = 1;
-
-    for(i = 0; i <= smallnumbers.length-1; i++) {
+    for(i = 0; i <= smallsindex.length-1; i++) {
+        let multiflier = 1;
         while(true) {
             multiflier++;
-            if(M <= smallnumbers[i]*multiflier && smallnumbers[i]*multiflier <= N) {
-                numRange.splice(smallnumbers[i]*multiflier-M, 1, false);
-            } else if (smallnumbers[i]*multiflier > N) {
+            let target = smallsindex[i]*multiflier;
+
+            if(target <= N) {
+                numRange.splice(target, 1, false);
+            } else if (target > N) {
                 break;
             }
+            
         }
     }
-    console.log(numRange);
+
+    let smallnums = [];
+
+    for(j = M; j <= N; j++) {
+        if(numRange[j] && j != 1) {
+            smallnums.push(j);
+        }
+    }
+    
+    console.log(smallnums.join('\n'));
 }
-//에스무시기 체에 따라 하는 중인데 잘 안된다. 모든 숫자범위를 true로 채운뒤에 소수가 아닌 숫자들의 위치만 false로 바꾸어
-//true index에 위치한 숫자들만 출력하고 싶은데...
+/*
+해냈다! 에스트라 무시기 체를 그대로 구현해냈다!
+다만 조금 아쉬운 점은 N의 제곱근 이하의 소수를 한 번 찾아낸 후에야
+해당 소수들의 곱셈값을 범위내에서 제외시켜야해서 그런지
+코드의 실행시간이 좀 길어졌다. 그래도 풀어낸 게 어디야! 숏코딩은 나중에 하하
+*/
